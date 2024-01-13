@@ -7,17 +7,19 @@ const {
   dashboardController,
   demoRegController,
   feeDetailsController,
-  studentDetailsController,
+  getStudentDetailsController,
+  updateStudentDetailsController,
   StudentsDetailsController,
   followupsController,
-  followupController,
+  getfollowupController,
+  updateFollowupController,
   markAttendanceController,
   attendanceDetailsController,
 } = require("../controllers/controllers");
 
 // @desc    login route
 // #method  POST
-const loginRoute = router.post("/login", loginController);
+const loginRoute = router.post("/", loginController);
 
 // @desc    signup route
 // #method  POST
@@ -33,16 +35,26 @@ const demoRegRoute = router.post("/demo_registration", demoRegController);
 
 // @desc    fee details route
 // #method  GET
-const feeDetailsRoute = router.get("/fee_details", feeDetailsController);
+const feeDetailsRoute = router.get(
+  "/fee_details/:studentContact",
+  feeDetailsController
+);
+
+// @desc    student Details route
+// #method  GET
+const getStudentDetailsRoute = router.get(
+  "/student_details/:_id",
+  getStudentDetailsController
+);
 
 // @desc    student Details route
 // #method  PUT
-const studentDetailsRoute = router.put(
+const updateStudentDetailsRoute = router.put(
   "/student_details/:_id",
-  studentDetailsController
+  updateStudentDetailsController
 );
 
-// @desc    students details route
+// @desc    All students details route
 // #method  GET
 const StudentsDetailsRoute = router.get(
   "/students_details",
@@ -54,8 +66,18 @@ const StudentsDetailsRoute = router.get(
 const followupsRoute = router.get("/follow_ups", followupsController);
 
 // @desc    Follow up route
-// #method  POST
-const followupRoute = router.get("/follow_up/:_id", followupController);
+// #method  GET
+const getFollowupRoute = router.get(
+  "/follow_up/:studentContact",
+  getfollowupController
+);
+
+//  @desc   Follow up route
+// method   POST
+const updateFollowupRoute = router.post(
+  "/follow_up/:studentContact",
+  updateFollowupController
+);
 
 // @desc    mark attendance route
 // #method  POST
@@ -77,10 +99,12 @@ module.exports = {
   dashboardRoute,
   demoRegRoute,
   feeDetailsRoute,
-  studentDetailsRoute,
+  getStudentDetailsRoute,
+  updateStudentDetailsRoute,
   StudentsDetailsRoute,
   followupsRoute,
-  followupRoute,
+  getFollowupRoute,
+  updateFollowupRoute,
   markAttendanceRoute,
   attendanceDetailsRoute,
 };

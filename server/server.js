@@ -1,11 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
+const cors = require("cors");
 const connection = require("./config/db");
 dotenv.config({ path: "./config/config.env" });
 const PORT = process.env.PORT || 5000;
 connection();
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const {
@@ -14,10 +16,12 @@ const {
   dashboardRoute,
   demoRegRoute,
   feeDetailsRoute,
-  studentDetailsRoute,
+  getStudentDetailsRoute,
+  updateStudentDetailsRoute,
   StudentsDetailsRoute,
   followupsRoute,
-  followupRoute,
+  getFollowupRoute,
+  updateFollowupRoute,
   markAttendanceRoute,
   attendanceDetailsRoute,
 } = require("./routers/routers");
@@ -42,8 +46,11 @@ app.use(API_VERSION, demoRegRoute);
 // fee details
 app.use(API_VERSION, feeDetailsRoute);
 
-// student details
-app.use(API_VERSION, studentDetailsRoute);
+// get student details
+app.use(API_VERSION, getStudentDetailsRoute);
+
+// update student details
+app.use(API_VERSION, updateStudentDetailsRoute);
 
 // students details
 app.use(API_VERSION, StudentsDetailsRoute);
@@ -51,8 +58,11 @@ app.use(API_VERSION, StudentsDetailsRoute);
 // follow ups
 app.use(API_VERSION, followupsRoute);
 
-// follow up
-app.use(API_VERSION, followupRoute);
+// get follow up
+app.use(API_VERSION, getFollowupRoute);
+
+// update follow up
+app.use(API_VERSION, updateFollowupRoute);
 
 // mark attendance
 app.use(API_VERSION, markAttendanceRoute);

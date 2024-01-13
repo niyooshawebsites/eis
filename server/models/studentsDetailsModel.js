@@ -10,6 +10,7 @@ const studentDetailsSchema = new mongoose.Schema(
     studentContact: {
       type: Number,
       trim: true,
+      unique: true,
       required: [true, "Please add student number"],
     },
     studentAddress: {
@@ -55,11 +56,17 @@ const studentDetailsSchema = new mongoose.Schema(
       default: 0,
       required: [true, "Please select student course"],
     },
-    teacher: {
+    demoTeacher: {
       type: String,
       trim: true,
       default: "N/A",
-      required: [true, "Please select the teacher"],
+      required: [true, "Please select the  demo teacher"],
+    },
+    classTeacher: {
+      type: String,
+      trim: true,
+      default: "N/A",
+      required: [true, "Please select the class teacher"],
     },
     followup: {
       type: String,
